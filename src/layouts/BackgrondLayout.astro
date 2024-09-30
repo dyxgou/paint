@@ -1,0 +1,30 @@
+---
+import Layout from "./Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout title="Winwos 98">
+  <Image
+    src="/windows.jpg"
+    alt="Windows 98"
+    loading="eager"
+    class="background"
+    decoding="async"
+    width="1920"
+    height="1020"
+  />
+
+  <div class="content">
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  .background {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+  }
+</style>
