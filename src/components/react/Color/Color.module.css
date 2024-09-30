@@ -1,0 +1,7 @@
+.color {
+  border-top: black 2px solid;
+  border-left: black 2px solid;
+  border-right: white 1px solid;
+  border-bottom: white 1px solid;
+  cursor: pointer;
+}
