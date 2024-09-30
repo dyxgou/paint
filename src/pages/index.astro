@@ -1,0 +1,29 @@
+---
+import BackgroundLayout from "@/layouts/BackgrondLayout.astro";
+import IconLink from "@/components/IconLink.astro";
+---
+
+<BackgroundLayout>
+  <main class="icons">
+    <IconLink name="Paint" icon="/paint.png" href="/paint" />
+    <IconLink
+      name="Github"
+      icon="/github.png"
+      href="https://github.com/dyxgou"
+      newPage
+    />
+  </main>
+</BackgroundLayout>
+
+<style>
+  .icons {
+    display: flex;
+    flex-direction: column;
+    padding: 3em;
+    gap: 5em;
+  }
+
+  .icons:hover {
+    border:;
+  }
+</style>
