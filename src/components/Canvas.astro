@@ -1,0 +1,34 @@
+<main id="canvas__container">
+  <canvas class="canvas"></canvas>
+</main>
+
+<script>
+  import { $color } from "@/store/color";
+  import { $tool } from "@/store/tools";
+  import Canvas from "@/utils/canvas";
+
+  const $canvas = document.querySelector("canvas")!;
+
+  const canvas = new Canvas($canvas);
+  canvas.resizeCanvas();
+  canvas.registerEvents();
+
+  $tool.subscribe((t) => {
+    canvas.setTool(t);
+  });
+
+  $color.subscribe((c) => {
+    canvas.setColor(c);
+  });
+</script>
+
+<style>
+  .canvas {
+    background-color: white;
+  }
+
+  #canvas__container {
+    height: 100%;
+    width: 100%;
+  }
+</style>

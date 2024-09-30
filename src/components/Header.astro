@@ -1,0 +1,22 @@
+---
+import SaveButton from "./SaveButton.astro";
+import ExitButton from "./ExitButton.astro";
+---
+
+<header class="header">
+  <h1>Untitled - Paint.astro</h1>
+  <SaveButton />
+  <ExitButton />
+</header>
+
+<style>
+  .header {
+    background-color: var(--bgHeader);
+    color: white;
+    font-size: 1em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: inset 0 0 0 3px var(--bgPanel);
+  }
+</style>
