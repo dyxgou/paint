@@ -6,7 +6,6 @@ type ColorProps = Readonly<{
 }>;
 
 const Color = ({ color }: ColorProps) => {
-  console.log({ color });
   return (
     <svg
       width={20}

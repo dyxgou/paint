@@ -1,12 +1,12 @@
 import useInputColor from "@/hooks/useInputColor";
 import Color from "../Color/Color";
 import styles from "./ColorPicker.module.css";
-import { useState } from "preact/hooks";
 import { $color } from "@/store/color";
+import { useState } from "preact/hooks";
 
 const ColorPicker = () => {
   const { colors, handleAddColor } = useInputColor();
-  const [currentColor, setCurrentColor] = useState<string>(colors[0]);
+  const [currentColor, setCurrentColor] = useState($color.get());
 
   $color.subscribe((c) => {
     setCurrentColor(c);

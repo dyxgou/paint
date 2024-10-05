@@ -1,4 +1,5 @@
 import Tool, { type ToolType } from "./tool";
+import { DEFAULT_LINE_WIDTH } from "./canvas";
 
 class Drawer extends Tool implements ToolType {
   #startX?: number;
@@ -12,10 +13,10 @@ class Drawer extends Tool implements ToolType {
   }
 
   onMouseDown({ offsetX, offsetY }: MouseEvent): void {
-    console.log({ l: this.ctx.lineWidth });
     this.isDrawing = true;
     this.#startX = offsetX;
     this.#startY = offsetY;
+    this.ctx.lineWidth = DEFAULT_LINE_WIDTH;
   }
 
   onMouseMove({ offsetX, offsetY }: MouseEvent): void {

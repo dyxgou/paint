@@ -4,8 +4,9 @@ import Drawer from "./drawer";
 import Eraser from "./eraser";
 import Trash from "./trash";
 import Rectangle from "./rectangle";
+import Fill from "./fill";
 
-export const DEFAULT_LINE_WIDTH = 1;
+export const DEFAULT_LINE_WIDTH = 2;
 
 class Canvas {
   #canvas: HTMLCanvasElement;
@@ -17,14 +18,12 @@ class Canvas {
   constructor(canvas: HTMLCanvasElement) {
     this.#canvas = canvas;
     this.#tool = "draw";
-    this.#ctx = this.#canvas.getContext("2d")!;
-    this.#ctx.lineWidth = DEFAULT_LINE_WIDTH;
-    console.log({ l: this.#ctx.lineWidth });
+    this.#ctx = this.#canvas.getContext("2d", { alpha: false })!;
     this.#TOOLS = {
       draw: new Drawer(this.#ctx),
       erase: new Eraser(this.#ctx),
       ellipse: new Drawer(this.#ctx),
-      fill: new Drawer(this.#ctx),
+      fill: new Fill(this.#ctx),
       rectangle: new Rectangle(this.#ctx),
       picker: new Drawer(this.#ctx),
       star: new Drawer(this.#ctx),
@@ -35,12 +34,14 @@ class Canvas {
   }
 
   resizeCanvas() {
-    const CANVAS_CONTAINER_ID = "canvas__container";
+    const dpr = window.devicePixelRatio;
+    const rect = this.#canvas.getBoundingClientRect();
 
-    const canvasContainer = document.getElementById(CANVAS_CONTAINER_ID)!;
-
-    this.#canvas.width = canvasContainer?.clientWidth;
-    this.#canvas.height = canvasContainer?.clientHeight;
+    this.#ctx.scale(dpr, dpr);
+    this.#canvas.width = rect.width * dpr;
+    this.#canvas.height = rect.height * dpr;
+    this.#ctx.fillStyle = "white";
+    this.#ctx.fillRect(0, 0, this.#canvas.width, this.#canvas.height);
   }
 
   setTool(tool: ToolsKey) {

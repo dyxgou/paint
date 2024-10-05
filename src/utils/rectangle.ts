@@ -1,3 +1,4 @@
+import { DEFAULT_LINE_WIDTH } from "./canvas";
 import Tool, { type ToolType } from "./tool";
 
 class Rectangle extends Tool implements ToolType {
@@ -15,6 +16,7 @@ class Rectangle extends Tool implements ToolType {
   onMouseDown({ offsetX, offsetY }: MouseEvent): void {
     this.isDrawing = true;
     this.#startX = offsetX;
+    this.ctx.lineWidth = DEFAULT_LINE_WIDTH;
     this.#startY = offsetY;
 
     const { width, height } = this.ctx.canvas;
