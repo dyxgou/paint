@@ -6,6 +6,7 @@ import Trash from "./trash";
 import Rectangle from "./rectangle";
 import Fill from "./fill";
 import Picker from "./picker";
+import Ellipse from "./ellipse";
 
 export const DEFAULT_LINE_WIDTH = 2;
 
@@ -24,7 +25,7 @@ class Canvas {
     this.#TOOLS = {
       draw: new Drawer(this.#ctx),
       erase: new Eraser(this.#ctx),
-      ellipse: new Drawer(this.#ctx),
+      ellipse: new Ellipse(this.#ctx),
       fill: new Fill(this.#ctx),
       rectangle: new Rectangle(this.#ctx),
       picker: new Picker(this.#ctx),
