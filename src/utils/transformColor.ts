@@ -1,4 +1,4 @@
-import type { Pixel } from "./getImagePixel";
+import type { Pixel } from "./imageManager";
 
 export const PIXEL_DISTANCE = 1;
 
@@ -27,11 +27,13 @@ export const hexToRgb = (color: string): Pixel => {
   const red = parseInt(hex.substring(0, 2), 16);
   const green = parseInt(hex.substring(2, 4), 16);
   const blue = parseInt(hex.substring(4, 6), 16);
+  const ALPHA = 255;
 
-  const pixel = new Uint8ClampedArray(3) as Pixel;
+  const pixel = new Uint8ClampedArray(4);
   pixel[0] = red;
   pixel[1] = green;
   pixel[2] = blue;
+  pixel[3] = ALPHA;
 
   return pixel;
 };

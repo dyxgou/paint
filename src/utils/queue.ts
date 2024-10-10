@@ -1,61 +1,66 @@
 class QNode<T> {
   value: T;
-  next: QNode<T> | null = null;
+  next: QNode<T> | null;
+  prev: QNode<T> | null;
 
   constructor(value: T) {
     this.value = value;
+    this.next = null;
+    this.prev = null;
   }
 }
 
 class Queue<T> {
-  #front: QNode<T> | null;
-  #back: QNode<T> | null;
+  #head: QNode<T> | null;
+  #tail: QNode<T> | null;
   #length: number;
 
   constructor() {
-    this.#front = null;
-    this.#back = null;
+    this.#head = null;
+    this.#tail = null;
     this.#length = 0;
   }
 
   put(value: T) {
-    const newNode = new QNode(value);
-    console.log({ newNode });
-
-    this.#length++;
+    const newNode = new QNode<T>(value);
 
     if (this.isEmpty()) {
-      this.#front = newNode;
-      this.#back = newNode;
-      return;
+      this.#head = newNode;
+      this.#tail = newNode;
+    } else {
+      this.#tail!.next = newNode;
+      newNode.prev = this.#tail;
+      this.#tail = newNode;
     }
 
-    this.#back!.next = newNode;
-    this.#back = newNode;
+    this.#length++;
   }
 
   get(): T | null {
-    if (this.isEmpty()) {
+    if (this.isEmpty() || !this.#head?.value) {
       return null;
     }
 
-    const value = this.#front!.value;
-    this.#front = this.#front!.next;
-    this.#length--;
+    const value = this.#head.value;
 
-    if (this.isEmpty()) {
-      this.#back = null;
+    this.#head = this.#head!.next;
+
+    if (this.#head) {
+      this.#head.prev = null;
+    } else {
+      this.#tail = null;
     }
 
+    this.#length--;
     return value;
   }
 
-  size(): number {
-    return this.#length;
+  isEmpty(): boolean {
+    return this.#head === null;
   }
 
-  isEmpty(): boolean {
-    return this.#front === null;
+  size() {
+    return this.#length;
   }
 }
 
