@@ -29,7 +29,7 @@ export const hexToRgb = (color: string): Pixel => {
   const blue = parseInt(hex.substring(4, 6), 16);
   const ALPHA = 255;
 
-  const pixel = new Uint8ClampedArray(4);
+  const pixel = new Array(4) as Pixel;
   pixel[0] = red;
   pixel[1] = green;
   pixel[2] = blue;
